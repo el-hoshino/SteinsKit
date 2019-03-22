@@ -10,6 +10,9 @@
       <FileRef
          location = "group:Brewfile">
       </FileRef>
+      <FileRef
+         location = "group:.sourcery.yml">
+      </FileRef>
    </Group>
    <FileRef
       location = "container:SteinsKit.xcodeproj">

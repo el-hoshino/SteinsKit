@@ -83,11 +83,8 @@
 			children = (
 				BF638FF62243C71600058858 /* SteinsKit.h */,
 				BF638FF72243C71600058858 /* Info.plist */,
-				BF6390112243CBF400058858 /* Observable.swift */,
-				BF63900D2243C85000058858 /* Variable.swift */,
-				BF6390132243CF7200058858 /* MappedVariable.swift */,
-				BF63900F2243C91200058858 /* Observation.swift */,
-				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
+				BF7FE1402244AF8C00FB4A20 /* Observations */,
+				BF7FE1412244AFBA00FB4A20 /* Variables */,
 			);
 			path = SteinsKit;
 			sourceTree = "<group>";
@@ -99,6 +96,25 @@
 				BF6390032243C71700058858 /* Info.plist */,
 			);
 			path = SteinsKitTests;
+			sourceTree = "<group>";
+		};
+		BF7FE1402244AF8C00FB4A20 /* Observations */ = {
+			isa = PBXGroup;
+			children = (
+				BF6390112243CBF400058858 /* Observable.swift */,
+				BF63900F2243C91200058858 /* Observation.swift */,
+				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
+			);
+			path = Observations;
+			sourceTree = "<group>";
+		};
+		BF7FE1412244AFBA00FB4A20 /* Variables */ = {
+			isa = PBXGroup;
+			children = (
+				BF63900D2243C85000058858 /* Variable.swift */,
+				BF6390132243CF7200058858 /* MappedVariable.swift */,
+			);
+			path = Variables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
