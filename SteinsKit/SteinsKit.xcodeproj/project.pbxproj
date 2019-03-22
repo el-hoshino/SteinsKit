@@ -10,6 +10,11 @@
 		BF638FFD2243C71700058858 /* SteinsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF638FF32243C71600058858 /* SteinsKit.framework */; };
 		BF6390022243C71700058858 /* SteinsKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390012243C71700058858 /* SteinsKitTests.swift */; };
 		BF6390042243C71700058858 /* SteinsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BF638FF62243C71600058858 /* SteinsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF63900E2243C85000058858 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63900D2243C85000058858 /* Variable.swift */; };
+		BF6390102243C91200058858 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63900F2243C91200058858 /* Observation.swift */; };
+		BF6390122243CBF400058858 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390112243CBF400058858 /* Observable.swift */; };
+		BF6390142243CF7200058858 /* MappedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390132243CF7200058858 /* MappedVariable.swift */; };
+		BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390152243E4FD00058858 /* ExecutionMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 		BF638FFC2243C71700058858 /* SteinsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SteinsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6390012243C71700058858 /* SteinsKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteinsKitTests.swift; sourceTree = "<group>"; };
 		BF6390032243C71700058858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF63900D2243C85000058858 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		BF63900F2243C91200058858 /* Observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
+		BF6390112243CBF400058858 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		BF6390132243CF7200058858 /* MappedVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappedVariable.swift; sourceTree = "<group>"; };
+		BF6390152243E4FD00058858 /* ExecutionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,11 @@
 			children = (
 				BF638FF62243C71600058858 /* SteinsKit.h */,
 				BF638FF72243C71600058858 /* Info.plist */,
+				BF6390112243CBF400058858 /* Observable.swift */,
+				BF63900D2243C85000058858 /* Variable.swift */,
+				BF6390132243CF7200058858 /* MappedVariable.swift */,
+				BF63900F2243C91200058858 /* Observation.swift */,
+				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
 			);
 			path = SteinsKit;
 			sourceTree = "<group>";
@@ -148,6 +163,7 @@
 				TargetAttributes = {
 					BF638FF22243C71600058858 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					BF638FFB2243C71700058858 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +210,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF6390142243CF7200058858 /* MappedVariable.swift in Sources */,
+				BF6390102243C91200058858 /* Observation.swift in Sources */,
+				BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */,
+				BF6390122243CBF400058858 /* Observable.swift in Sources */,
+				BF63900E2243C85000058858 /* Variable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +379,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.crazism.SteinsKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -391,6 +413,7 @@
 		BF63900B2243C71700058858 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = SteinsKitTests/Info.plist;
@@ -409,6 +432,7 @@
 		BF63900C2243C71700058858 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KC8N9BMQJY;
 				INFOPLIST_FILE = SteinsKitTests/Info.plist;
