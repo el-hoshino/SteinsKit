@@ -10,11 +10,11 @@
 		BF638FFD2243C71700058858 /* SteinsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF638FF32243C71600058858 /* SteinsKit.framework */; };
 		BF6390022243C71700058858 /* SteinsKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390012243C71700058858 /* SteinsKitTests.swift */; };
 		BF6390042243C71700058858 /* SteinsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BF638FF62243C71600058858 /* SteinsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF63900E2243C85000058858 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63900D2243C85000058858 /* Variable.swift */; };
 		BF6390102243C91200058858 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF63900F2243C91200058858 /* Observation.swift */; };
 		BF6390122243CBF400058858 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390112243CBF400058858 /* Observable.swift */; };
-		BF6390142243CF7200058858 /* MappedVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390132243CF7200058858 /* MappedVariable.swift */; };
 		BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390152243E4FD00058858 /* ExecutionMethod.swift */; };
+		BF7FE1432244B0EC00FB4A20 /* Variable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = BF7FE1422244B0EC00FB4A20 /* Variable.stencil */; };
+		BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,11 +34,11 @@
 		BF638FFC2243C71700058858 /* SteinsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SteinsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6390012243C71700058858 /* SteinsKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteinsKitTests.swift; sourceTree = "<group>"; };
 		BF6390032243C71700058858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BF63900D2243C85000058858 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		BF63900F2243C91200058858 /* Observation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		BF6390112243CBF400058858 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		BF6390132243CF7200058858 /* MappedVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappedVariable.swift; sourceTree = "<group>"; };
 		BF6390152243E4FD00058858 /* ExecutionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionMethod.swift; sourceTree = "<group>"; };
+		BF7FE1422244B0EC00FB4A20 /* Variable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Variable.stencil; sourceTree = "<group>"; };
+		BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +83,8 @@
 			children = (
 				BF638FF62243C71600058858 /* SteinsKit.h */,
 				BF638FF72243C71600058858 /* Info.plist */,
-				BF6390112243CBF400058858 /* Observable.swift */,
-				BF63900D2243C85000058858 /* Variable.swift */,
-				BF6390132243CF7200058858 /* MappedVariable.swift */,
-				BF63900F2243C91200058858 /* Observation.swift */,
-				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
+				BF7FE1402244AF8C00FB4A20 /* Observations */,
+				BF7FE1412244AFBA00FB4A20 /* Variables */,
 			);
 			path = SteinsKit;
 			sourceTree = "<group>";
@@ -99,6 +96,25 @@
 				BF6390032243C71700058858 /* Info.plist */,
 			);
 			path = SteinsKitTests;
+			sourceTree = "<group>";
+		};
+		BF7FE1402244AF8C00FB4A20 /* Observations */ = {
+			isa = PBXGroup;
+			children = (
+				BF6390112243CBF400058858 /* Observable.swift */,
+				BF63900F2243C91200058858 /* Observation.swift */,
+				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
+			);
+			path = Observations;
+			sourceTree = "<group>";
+		};
+		BF7FE1412244AFBA00FB4A20 /* Variables */ = {
+			isa = PBXGroup;
+			children = (
+				BF7FE1422244B0EC00FB4A20 /* Variable.stencil */,
+				BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */,
+			);
+			path = Variables;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +135,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF6390072243C71700058858 /* Build configuration list for PBXNativeTarget "SteinsKit" */;
 			buildPhases = (
+				BF7FE1442244B1B100FB4A20 /* Run Sourcery */,
 				BF638FEE2243C71600058858 /* Headers */,
 				BF638FEF2243C71600058858 /* Sources */,
 				BF638FF02243C71600058858 /* Frameworks */,
@@ -193,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF7FE1432244B0EC00FB4A20 /* Variable.stencil in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,16 +223,36 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BF7FE1442244B1B100FB4A20 /* Run Sourcery */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Sourcery";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "which sourcery >/dev/null || brew install sourcery\nsourcery \n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BF638FEF2243C71600058858 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF6390142243CF7200058858 /* MappedVariable.swift in Sources */,
+				BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */,
 				BF6390102243C91200058858 /* Observation.swift in Sources */,
 				BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */,
 				BF6390122243CBF400058858 /* Observable.swift in Sources */,
-				BF63900E2243C85000058858 /* Variable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
