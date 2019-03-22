@@ -1,0 +1,10 @@
+project:
+  file: SteinsKit.xcodeproj
+  target:
+    name: SteinsKit
+
+templates:
+  - SteinsKit/Variables/Variable.stencil
+
+output:
+  SteinsKit/Variables

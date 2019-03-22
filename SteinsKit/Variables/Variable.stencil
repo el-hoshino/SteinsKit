@@ -1,0 +1,99 @@
+{% set variableTypes "Variable,MappedVariable"|split:"," %}
+
+{% for type in variableTypes %}
+
+public final class {{type}}<Value> {
+
+    private var value: Value {
+        didSet { runObservations() }
+    }
+
+    private var observations: Set<Observation<Value>> = []
+
+    private var relatedVariables: [AnyObject] = []
+
+    {% if type|!contains:"Mapped" %}public {% endif %}init(_ value: Value) {
+        self.value = value
+    }
+
+}
+
+extension {{type}} {
+
+    private func runObservations() {
+
+        let newValue = value
+
+        for observation in observations {
+            if observation.observerDeinited {
+                observations.remove(observation)
+
+            } else {
+                observation.run(with: newValue)
+            }
+
+        }
+
+    }
+
+}
+
+extension {{type }} {
+
+    private func addObserver <Observer: AnyObject> (_ observer: Observer,
+                                                    executionMethod: ExecutionMethod,
+                                                    handler: @escaping (Observer, Value) -> Void) {
+
+        defer { handler(observer, value) }
+
+        let observation = Observation(observer: observer, method: executionMethod, observingAction: handler)
+
+        observations.insert(observation)
+
+    }
+
+}
+
+extension {{ type }} {
+
+    public var currentValue: Value {
+        return value
+    }
+
+    {% if type|!contains:"Mapped" %}public {% endif %}func accept(_ newValue: Value) {
+        value = newValue
+    }
+
+}
+
+extension {{ type }}: Observable {
+
+    public func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> MappedVariable<NewValue> {
+
+        let mappedValue = transform(value)
+        let mappedVariable = MappedVariable<NewValue>(mappedValue)
+        addObserver(mappedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
+        relatedVariables.append(mappedVariable)
+
+        return mappedVariable
+
+    }
+
+    public func beObserved <Observer: AnyObject> (by observer: Observer,
+                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
+
+        addObserver(observer, executionMethod: .directly, handler: handler)
+
+    }
+
+    public func beObserved <Observer: AnyObject> (by observer: Observer,
+                                                  _ method: ExecutionMethod,
+                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
+
+        addObserver(observer, executionMethod: method, handler: handler)
+
+    }
+
+}
+
+{% endfor %}
