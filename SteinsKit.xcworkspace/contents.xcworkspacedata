@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:"
+      name = "Environment">
+      <FileRef
+         location = "group:bootstrap.sh">
+      </FileRef>
+      <FileRef
+         location = "group:Brewfile">
+      </FileRef>
+   </Group>
    <FileRef
       location = "container:SteinsKit.xcodeproj">
    </FileRef>
