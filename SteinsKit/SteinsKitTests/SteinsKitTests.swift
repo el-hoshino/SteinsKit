@@ -22,6 +22,20 @@ class SteinsKitTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let int = Variable(0)
+        let label = UILabel()
+        
+        XCTAssert(label.text == nil)
+        
+        int.map({ $0 * 2 })
+            .map({ "\($0)" })
+            .beObserved(by: label, onChanged: { $0.text = $1 })
+        XCTAssert(label.text == "0")
+        
+        int.accept(1)
+        XCTAssert(label.text == "2")
+        
     }
 
     func testPerformanceExample() {
