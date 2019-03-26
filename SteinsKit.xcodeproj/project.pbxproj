@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF5FDB032248E78E001C5D93 /* LazyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FDB022248E78E001C5D93 /* LazyValue.swift */; };
 		BF638FFD2243C71700058858 /* SteinsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF638FF32243C71600058858 /* SteinsKit.framework */; };
 		BF6390022243C71700058858 /* SteinsKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390012243C71700058858 /* SteinsKitTests.swift */; };
 		BF6390042243C71700058858 /* SteinsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = BF638FF62243C71600058858 /* SteinsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -15,6 +16,7 @@
 		BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390152243E4FD00058858 /* ExecutionMethod.swift */; };
 		BF7FE1432244B0EC00FB4A20 /* Variable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = BF7FE1422244B0EC00FB4A20 /* Variable.stencil */; };
 		BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */; };
+		BFB11CF02249EE330095E76E /* AnyObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB11CEF2249EE330095E76E /* AnyObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF5FDB022248E78E001C5D93 /* LazyValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyValue.swift; sourceTree = "<group>"; };
 		BF638FF32243C71600058858 /* SteinsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SteinsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF638FF62243C71600058858 /* SteinsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SteinsKit.h; sourceTree = "<group>"; };
 		BF638FF72243C71600058858 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		BF6390152243E4FD00058858 /* ExecutionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionMethod.swift; sourceTree = "<group>"; };
 		BF7FE1422244B0EC00FB4A20 /* Variable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Variable.stencil; sourceTree = "<group>"; };
 		BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.generated.swift; sourceTree = "<group>"; };
+		BFB11CEF2249EE330095E76E /* AnyObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				BF6390112243CBF400058858 /* Observable.swift */,
+				BFB11CEF2249EE330095E76E /* AnyObservable.swift */,
 				BF63900F2243C91200058858 /* Observation.swift */,
 				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
 			);
@@ -113,6 +118,7 @@
 			children = (
 				BF7FE1422244B0EC00FB4A20 /* Variable.stencil */,
 				BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */,
+				BF5FDB022248E78E001C5D93 /* LazyValue.swift */,
 			);
 			path = Variables;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(PROJECT_DIR)/SteinsKit/Variables/Variable.stencil",
 			);
 			name = "Run Sourcery";
 			outputFileListPaths = (
@@ -252,6 +259,8 @@
 			files = (
 				BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */,
 				BF6390102243C91200058858 /* Observation.swift in Sources */,
+				BF5FDB032248E78E001C5D93 /* LazyValue.swift in Sources */,
+				BFB11CF02249EE330095E76E /* AnyObservable.swift in Sources */,
 				BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */,
 				BF6390122243CBF400058858 /* Observable.swift in Sources */,
 			);
