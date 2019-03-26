@@ -1,10 +1,14 @@
-{% set variableTypes "Variable,MappedVariable"|split:"," %}
+{% set variableTypes "Variable,LazyVariable"|split:"," %}
 
 {% for type in variableTypes %}
 
 public final class {{type}}<Value> {
 
+    {% if type|contains:"Lazy" %}
+    private var value: Lazy<Value> {
+    {% else %}
     private var value: Value {
+    {% endif %}
         didSet { runObservations() }
     }
 
@@ -12,9 +16,25 @@ public final class {{type}}<Value> {
 
     private var relatedVariables: [AnyObject] = []
 
-    {% if type|!contains:"Mapped" %}public {% endif %}init(_ value: Value) {
+    public init(_ value: Value) {
+        {% if type|contains:"Lazy" %}
+        self.value = .initialized(value)
+        {% else %}
         self.value = value
+        {% endif %}
     }
+
+    {% if type|contains:"Lazy" %}
+    public init() {
+        self.value = .uninitialized
+    }
+    {% endif %}
+
+    {% if type|contains:"Lazy" %}
+    init(lazyValue: Lazy<Value>) {
+        self.value = lazyValue
+    }
+    {% endif %}
 
 }
 
@@ -22,7 +42,11 @@ extension {{type}} {
 
     private func runObservations() {
 
+        {% if type|contains:"Lazy" %}
+        guard let newValue = value.value else { return }
+        {% else %}
         let newValue = value
+        {% endif %}
 
         for observation in observations {
             if observation.observerDeinited {
@@ -44,11 +68,16 @@ extension {{type }} {
                                                     executionMethod: ExecutionMethod,
                                                     handler: @escaping (Observer, Value) -> Void) {
 
-        defer { handler(observer, value) }
-
         let observation = Observation(observer: observer, method: executionMethod, observingAction: handler)
 
         observations.insert(observation)
+
+        {% if type|contains:"Lazy" %}
+        guard let currentValue = value.value else { return }
+        {% else %}
+        let currentValue = value
+        {% endif %}
+        handler(observer, currentValue)
 
     }
 
@@ -56,26 +85,39 @@ extension {{type }} {
 
 extension {{ type }} {
 
-    public var currentValue: Value {
+    public var currentValue: Value{% if type|contains:"Lazy" %}?{% endif %} {
+        {% if type|contains: "Lazy" %}
+        return value.value
+        {% else %}
         return value
+        {% endif %}
     }
 
-    {% if type|!contains:"Mapped" %}public {% endif %}func accept(_ newValue: Value) {
+    public func accept(_ newValue: Value) {
+        {% if type|contains: "Lazy" %}
+        value = .initialized(newValue)
+        {% else %}
         value = newValue
+        {% endif %}
     }
-
 }
 
 extension {{ type }}: Observable {
 
-    public func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> MappedVariable<NewValue> {
+    public func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue> {
 
-        let mappedValue = transform(value)
-        let mappedVariable = MappedVariable<NewValue>(mappedValue)
-        addObserver(mappedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
-        relatedVariables.append(mappedVariable)
+        {% if type|contains:"Lazy" %}
+        let transformedValue = value.transformed(by: transform)
+        let transformedVariable = LazyVariable<NewValue>(lazyValue: transformedValue)
+        {% else %}
+        let transformedValue = transform(value)
+        let transformedVariable = Variable<NewValue>(transformedValue)
+        {% endif %}
+        addObserver(transformedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
+        relatedVariables.append(transformedVariable)
 
-        return mappedVariable
+        let wrappedVariable = AnyObservable(transformedVariable)
+        return wrappedVariable
 
     }
 

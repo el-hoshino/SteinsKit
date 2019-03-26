@@ -238,6 +238,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(PROJECT_DIR)/SteinsKit/Variables/Variable.stencil",
 			);
 			name = "Run Sourcery";
 			outputFileListPaths = (
