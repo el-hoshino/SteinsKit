@@ -15,6 +15,7 @@
 		BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6390152243E4FD00058858 /* ExecutionMethod.swift */; };
 		BF7FE1432244B0EC00FB4A20 /* Variable.stencil in Resources */ = {isa = PBXBuildFile; fileRef = BF7FE1422244B0EC00FB4A20 /* Variable.stencil */; };
 		BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */; };
+		BFB11CF02249EE330095E76E /* AnyObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB11CEF2249EE330095E76E /* AnyObservable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		BF6390152243E4FD00058858 /* ExecutionMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExecutionMethod.swift; sourceTree = "<group>"; };
 		BF7FE1422244B0EC00FB4A20 /* Variable.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Variable.stencil; sourceTree = "<group>"; };
 		BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Variable.generated.swift; sourceTree = "<group>"; };
+		BFB11CEF2249EE330095E76E /* AnyObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyObservable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				BF6390112243CBF400058858 /* Observable.swift */,
+				BFB11CEF2249EE330095E76E /* AnyObservable.swift */,
 				BF63900F2243C91200058858 /* Observation.swift */,
 				BF6390152243E4FD00058858 /* ExecutionMethod.swift */,
 			);
@@ -252,6 +255,7 @@
 			files = (
 				BF7FE1462244D1CD00FB4A20 /* Variable.generated.swift in Sources */,
 				BF6390102243C91200058858 /* Observation.swift in Sources */,
+				BFB11CF02249EE330095E76E /* AnyObservable.swift in Sources */,
 				BF6390162243E4FD00058858 /* ExecutionMethod.swift in Sources */,
 				BF6390122243CBF400058858 /* Observable.swift in Sources */,
 			);
