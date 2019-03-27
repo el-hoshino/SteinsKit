@@ -28,7 +28,8 @@ class SteinsKitTests: XCTestCase {
         
         XCTAssert(label.text == nil)
         
-        int.map({ $0 * 2 })
+        int.asAnyObservable()
+            .map({ $0 * 2 })
             .map({ "\($0)" })
             .beObserved(by: label, onChanged: { $0.text = $1 })
         XCTAssert(label.text == "0")
