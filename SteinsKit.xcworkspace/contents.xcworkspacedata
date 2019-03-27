@@ -13,6 +13,12 @@
       <FileRef
          location = "group:.sourcery.yml">
       </FileRef>
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+      <FileRef
+         location = "group:LICENSE">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:SteinsKit.playground">
