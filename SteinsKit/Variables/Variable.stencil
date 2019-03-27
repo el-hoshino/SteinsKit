@@ -100,6 +100,15 @@ extension {{ type }} {
         value = newValue
         {% endif %}
     }
+
+}
+
+extension {{ type }} {
+
+    public func asAnyObservable() -> AnyObservable<Value> {
+        return AnyObservable(self)
+    }
+
 }
 
 extension {{ type }}: Observable {
