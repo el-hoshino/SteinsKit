@@ -33,7 +33,7 @@ protocol ModelProtocol: AnyObject {
     func countUp()
 }
 
-final class ViewController : UIViewController {
+final class ViewController: UIViewController {
     
     private lazy var label: UILabel = {
         let label = UILabel()
