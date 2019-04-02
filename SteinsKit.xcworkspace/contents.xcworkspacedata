@@ -18,7 +18,7 @@
          location = "group:"
          name = "GitHub Pull Request Template">
          <FileRef
-            location = "group:.github/PULL_REQUEST_TEMPLATE/Normal.md">
+            location = "group:.github/PULL_REQUEST_TEMPLATE/issue.md">
          </FileRef>
       </Group>
       <FileRef
