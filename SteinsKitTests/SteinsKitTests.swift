@@ -37,6 +37,10 @@ class SteinsKitTests: XCTestCase {
         int.accept(1)
         XCTAssert(label.text == "2")
         
+        var checked = false
+        int.runWithLatestValue({ XCTAssert($0 == 1); checked = true })
+        XCTAssert(checked)
+        
     }
 
     func testPerformanceExample() {
