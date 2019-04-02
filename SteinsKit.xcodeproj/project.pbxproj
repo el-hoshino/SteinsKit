@@ -141,8 +141,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF6390072243C71700058858 /* Build configuration list for PBXNativeTarget "SteinsKit" */;
 			buildPhases = (
-				BFF2A9892253131400751940 /* Swiftlint */,
 				BF7FE1442244B1B100FB4A20 /* Run Sourcery */,
+				BFF2A9892253131400751940 /* SwiftLint */,
 				BF638FEE2243C71600058858 /* Headers */,
 				BF638FEF2243C71600058858 /* Sources */,
 				BF638FF02243C71600058858 /* Frameworks */,
@@ -253,7 +253,7 @@
 			shellPath = /bin/sh;
 			shellScript = "which sourcery >/dev/null || brew install sourcery\nsourcery \n";
 		};
-		BFF2A9892253131400751940 /* Swiftlint */ = {
+		BFF2A9892253131400751940 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -262,7 +262,7 @@
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
