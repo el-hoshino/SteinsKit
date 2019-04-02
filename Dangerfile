@@ -21,7 +21,7 @@ end
 # Check for modifications of bootstrap.sh
 def bootstrap_sh_has_been_modified
     
-    modified = !git.modified_files.include?("bootstrap.sh")
+    modified = git.modified_files.include?("bootstrap.sh")
     return modified
     
 end
@@ -29,7 +29,7 @@ end
 # Check for modifications of Brewfile
 def brewfile_has_been_modified
     
-    modified = !git.modified_files.include?("Brewfile")
+    modified = git.modified_files.include?("Brewfile")
     return modified
     
 end
@@ -194,7 +194,7 @@ end
 # Main routine
 
 ## If there is a modification in bootstrap.sh file, ask for checking Bitrise workflow.
-if brewfile_has_been_modified
+if bootstrap_sh_has_been_modified
     warn "bootstrap.sh file as modifications. Please remember to check and update Bitrise workflow in case needed."
 end
 
