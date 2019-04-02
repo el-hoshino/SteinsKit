@@ -53,61 +53,15 @@ github "el-hoshino/SteinsKit"
 
 You can check a demo code in Playground. It looks like this:
 
-```swift
-protocol ModelProtocol: AnyObject {
-    var title: AnyObservable<String> { get }
-}
-
-final class MyViewController : UIViewController {
-    
-    var model: ModelProtocol!
-    
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
-
-        let label = UILabel()
-        label.frame = CGRect(x: 25, y: 200, width: 320, height: 60)
-        label.textColor = .black
-        label.numberOfLines = 0
-        model.title.beObserved(by: label, onChanged: { $0.text = $1 })
-        
-        view.addSubview(label)
-        self.view = view
-    }
-}
-
-final class Model {
-    
-    private var _counter = 0
-    private let _title: LazyVariable<String> = .init()
-    
-    func countUp() {
-        _counter += 1
-        _title.accept("Welcome!\nWe have \(_counter) people visited our playground!")
-    }
-    
-}
-
-extension Model: ModelProtocol {
-    
-    var title: AnyObservable<String> {
-        return _title.asAnyObservable
-    }
-    
-}
-
-let vc = MyViewController()
-let model = Model()
-vc.model = model
-
-// Present the view controller in the Live View window
-PlaygroundPage.current.liveView = vc
-
-model.countUp()
-```
-
 ![screenshot](README_Resource/PlaygroundSample.png)
+
+But anyway, the core code that this framework does (and is aimed to) is like this:
+
+```swift
+model.count
+    .map({ "Welcome!\nWe have \($0) visitors visited\nour playground!" })
+    .beObserved(by: label, .asyncOnQueue(.main), onChanged: { $0.text = $1 })
+```
 
 ### Tell me more
 
@@ -122,19 +76,15 @@ You may notice that in the sample above, there is no `[weak object]` capture lis
 1. The object passed to `by:` parameter in `beObserved` method will be weakly referred in `Variable`. This makes the object acts like a `DisposeBag` in RxSwift, that when the object is released from memory, the subscription will also be released from the `Variable`.
 2. The object passed to `by:` parameter in `beObserved` method will also be sent to `onChanged` handler closure as the first input parameter `$0`, and is already weakly captured inside the `beObserved` method. So you don't have to declare it in the capture list manually in your code, and in addition you can directly use it in your closure with `$1` as the latest value.
 
-In addition, you can also pass a queue to `beObserved` method to specify which queue should the `onChanged` handler run with. For example:
+In addition, you can also choose which queue to use for the observation. The settings are:
 
-```swift
-model.title.beObserved(by: label, .async(.main), onChanged: { $0.text = $1 })
-```
-
-will make the `onChanged` handler running on `DispatchQueue.main` queue asyncly. You can choose from `.directly` (which is also the default specification if you don't pass anything to this parameter), `async(DispatchQueue)` and `sync(DispatchQueue)`. These settings work like below:
-
-- `.directly`: The `onChanged` handler will immediatly run after the value changed, just on the queue which changed the value.
 - `.async(DispatchQueue)`: The `onChanged` handler will run after the value changed, on the queue passed, using `DispatchQueue.async`. Handy for UI components as the subscriber to redraw with latest values on main thread.
 - .`sync(DispatchQueue)`: The `onChanged` handler will run after the value changed, on the queue passed, using `DispatchQueue.sunc`. Always remember that this may cause a deadlock if you don't use the threads properly.
+- `.directly`: The `onChanged` handler will run immediatly after the value changed, just on the queue which changed the value.
 
-All the design described above makes it much simpler to write an Observer Pattern code.
+And if you choose not to pass the queue parameter, `.directly` will be used.
+
+All the design described above makes it much more simple to write an Observer Pattern code.
 
 ## Known issues
 
