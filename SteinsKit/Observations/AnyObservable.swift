@@ -12,6 +12,10 @@ import Foundation
 // Reference: https://qiita.com/omochimetaru/items/5d26b95eb21e022106f0#type-erasure-継承-box-方式
 private class AnyObservableBox<Value> {
     
+    func runWithLatestValue(_ execution: (Value) -> Void) {
+        fatalError()
+    }
+    
     func map<NewValue>(_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue> {
         fatalError()
     }
@@ -35,6 +39,10 @@ private final class ObservableBox<O: Observable>: AnyObservableBox<O.Value> {
     
     init(_ base: O) {
         self.base = base
+    }
+    
+    override func runWithLatestValue(_ execution: (O.Value) -> Void) {
+        return base.runWithLatestValue(execution)
     }
     
     override func map<NewValue>(_ transform: @escaping (O.Value) -> NewValue) -> AnyObservable<NewValue> {
@@ -65,6 +73,10 @@ public struct AnyObservable<Value> {
 }
 
 extension AnyObservable: Observable {
+    
+    public func runWithLatestValue(_ execution: (Value) -> Void) {
+        return box.runWithLatestValue(execution)
+    }
     
     public func map<NewValue>(_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue> {
         return box.map(transform)
