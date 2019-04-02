@@ -113,6 +113,17 @@ extension {{ type }} {
 
 extension {{ type }}: Observable {
 
+    public func runWithLatestValue (_ execution: (Value) -> Void) {
+
+        {% if type|contains:"Lazy" %}
+        guard let value = currentValue else { return }
+        {% else %}
+        let value = currentValue
+        {% endif %}
+        execution(value)
+
+    }
+
     public func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue> {
 
         {% if type|contains:"Lazy" %}
