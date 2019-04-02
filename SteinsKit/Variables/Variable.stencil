@@ -101,6 +101,11 @@ extension {{ type }} {
         {% endif %}
     }
 
+    public func accept(_ calculation: (Value{% if type|contains:"Lazy" %}?{% endif %}) -> Value) {
+        let newValue = calculation(currentValue)
+        accept(newValue)
+    }
+
 }
 
 extension {{ type }} {

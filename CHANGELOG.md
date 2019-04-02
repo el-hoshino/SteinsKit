@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - A method `runWithLatestValue` for `Observable`s to run a command immediately with latest value available.
+- A new method `accept` to update the value with a closure
 
 ### Others
 - SwiftLint support
