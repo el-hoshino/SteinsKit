@@ -12,7 +12,10 @@ public protocol Observable {
     
     associatedtype Value
     
+    func runWithLatestValue (_ execution: (Value) -> Void)
+    
     func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue>
+    
     func beObserved <Observer: AnyObject> (by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void)
     func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void)
     

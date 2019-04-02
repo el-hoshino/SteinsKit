@@ -21,7 +21,7 @@ end
 # Check for modifications of bootstrap.sh
 def bootstrap_sh_has_been_modified
     
-    modified = !git.modified_files.include?("bootstrap.sh")
+    modified = git.modified_files.include?("bootstrap.sh")
     return modified
     
 end
@@ -29,7 +29,7 @@ end
 # Check for modifications of Brewfile
 def brewfile_has_been_modified
     
-    modified = !git.modified_files.include?("Brewfile")
+    modified = git.modified_files.include?("Brewfile")
     return modified
     
 end
@@ -37,7 +37,15 @@ end
 # Check for modifications of Info.plist
 def info_plist_has_been_modified
 
-    modified = !git.modified_files.include?("Info.plist")
+    modified = git.modified_files.include?("SteinsKit/Info.plist")
+    return modified
+
+end
+
+# Check for modifications of CHANGELOG.md
+def changelog_has_been_modified
+
+    modified = git.modified_files.include?("CHANGELOG.md")
     return modified
 
 end
@@ -65,6 +73,39 @@ def common_swiftlint_check
 
     swiftlint.config_file = '.swiftlint.yml'
     swiftlint.lint_files inline_mode: true
+
+end
+
+# Release modification check
+def release_modification_check_into_result(result)
+
+    ## Version should be updated in Release
+    result.message << "Info.plist modification check |"
+    has_info_plist_modification = info_plist_has_been_modified
+
+    if has_info_plist_modification
+        result.message += ":heavy_exclamation_mark:\n"
+        warn "This PR contains release modification. Please remember to check if the version in Info.plist has been updated."
+    else
+        fail "This PR contains release modification but Info.Plist file has no modification. Please update the version in the file."
+        result.message += ":x:\n"
+        result.errors += 1
+    end
+
+    ## Changelog should be updated in Release
+    result.message << "CHANGELOG.md modification check |"
+    has_changelog_modification = changelog_has_been_modified
+
+    if has_changelog_modification
+        result.message += ":heavy_exclamation_mark:\n"
+        warn "This PR contains release modification. Please remember to check if CHANGELOG.md has been updated."
+    else
+        fail "This PR contains release modification but CHANGELOG.md file has no modification. Please update the change log file."
+        result.message += ":x:\n"
+        result.errors += 1
+    end
+
+    return result
 
 end
 
@@ -97,16 +138,17 @@ def develop_pr_check
 
     result = CheckResult.new("Develop PR Check Result")
 
-    ## PR should be sent from a branch that begins with `feature/`, `refactor/`, `fix/` or `issue/`
+    ## PR should be sent from a branch that begins with `feature/`, `refactor/`, `fix/`, `issue/` or `version/`
     result.message << "Head Branch check |"
     is_from_feature = github.branch_for_head.start_with?("feature/")
     is_from_refactor = github.branch_for_head.start_with?("refactor/")
     is_from_fix = github.branch_for_head.start_with?("fix/")
     is_from_issue = github.branch_for_head.start_with?("issue/")
-    if is_from_feature || is_from_refactor || is_from_fix || is_from_issue
+    is_from_version = github.branch_for_head.start_with?("version/")
+    if is_from_feature || is_from_refactor || is_from_fix || is_from_issue || is_from_version
         result.message << ":o:\n"
     else
-        fail "Please send the PR from a from a branch that begins with `feature/`, `refactor/`, `fix/` or `issue/`."
+        fail "Please send the PR from a from a branch that begins with `feature/`, `refactor/`, `fix/`, `issue/` or `version/`."
         result.message << ":x:\n"
         result.errors += 1
     end
@@ -120,6 +162,11 @@ def develop_pr_check
         fail "Please send the PR to `develop` branch."
         result.message << ":x:\n"
         result.errors += 1
+    end
+
+    ## If PR is sent from a branch that begins with `version/`, do a release modification check
+    if is_from_version
+        release_modification_check_into_result(result)
     end
 
     ## PR shouldn't contain any merge commits
@@ -175,17 +222,8 @@ def release_pr_check
         result.errors += 1
     end
 
-    ## Version should be updated in Release PR
-    result.message << "Info.plist modification check |"
-    has_info_plist_modification = info_plist_has_been_modified
-    if has_info_plist_modification
-        result.message += ":heavy_exclamation_mark:\n"
-        warn "This is a Release PR. Please remember to check if the version in Info.plist has been updated."
-    else
-        fail "This is a Release PR but Info.Plist file has no modification. Please update the version in the file."
-        result.message += ":x:\n"
-        result.errors += 1
-    end
+    ## Release modification check
+    release_modification_check_into_result(result)
 
     return result
 
@@ -194,7 +232,7 @@ end
 # Main routine
 
 ## If there is a modification in bootstrap.sh file, ask for checking Bitrise workflow.
-if brewfile_has_been_modified
+if bootstrap_sh_has_been_modified
     warn "bootstrap.sh file as modifications. Please remember to check and update Bitrise workflow in case needed."
 end
 

@@ -3,43 +3,76 @@ import UIKit
 import PlaygroundSupport
 import SteinsKit
 
-protocol ModelProtocol: AnyObject {
-    var title: AnyObservable<String> { get }
-}
-final class MyViewController : UIViewController {
-    var model: ModelProtocol!
-    override func loadView() {
-        let view = UIView()
-        view.backgroundColor = .white
-        let label = UILabel()
-        label.frame = CGRect(x: 25, y: 200, width: 320, height: 60)
-        label.numberOfLines = 0
-        
-        view.addSubview(label)
-        self.view = view
-        
-        model.title.beObserved(by: label, onChanged: { $0.text = $1 })
-    }
-}
-
+// MARK: - Model
 final class Model {
-    private var _counter = 0
-    private let _title: LazyVariable<String> = .init()
-    func countUp() {
-        _counter += 1
-        _title.accept("Welcome!\nWe have \(_counter) people visited our playground!")
-    }    
-}
-extension Model: ModelProtocol {
-    var title: AnyObservable<String> {
-        return _title.asAnyObservable()
+    
+    private var _count: Variable<Int> = .init(0)
+    
+    private func _countUp() {
+        _count.accept({ $0 + 1 })
     }
+    
 }
 
-let vc = MyViewController()
+extension Model: ModelProtocol {
+    
+    var count: AnyObservable<Int> {
+        return _count.asAnyObservable()
+    }
+    
+    func countUp() {
+        _countUp()
+    }
+    
+}
+// MARK: Model End -
+
+// MARK: - View Controller
+protocol ModelProtocol: AnyObject {
+    var count: AnyObservable<Int> { get }
+    func countUp()
+}
+
+final class ViewController: UIViewController {
+    
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 25, y: 200, width: 320, height: 100)
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    var model: ModelProtocol!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        view.addSubview(label)
+        startObservation()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        addCount()
+    }
+    
+    private func startObservation() {
+        model.count
+            .map({ "Welcome!\nWe have \($0) visitors visited\nour playground!" })
+            .beObserved(by: label, .asyncOnQueue(.main), onChanged: { $0.text = $1 })
+    }
+    
+    private func addCount() {
+        model.countUp()
+    }
+    
+}
+// MARK: View Controller End -
+
+// MARK: - Main
+let vc = ViewController()
 let model = Model()
 vc.model = model
 
+PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.liveView = vc
-
-model.countUp()
