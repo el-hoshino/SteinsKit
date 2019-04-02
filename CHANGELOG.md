@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2019-04-02
+
 ### Added
 - A method `runWithLatestValue` for `Observable`s to run a command immediately with latest value available.
 - A new method `accept` to update the value with a closure
