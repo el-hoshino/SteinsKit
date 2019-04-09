@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `.asyncOnMain` and `.asyncOnGlobal(qos:)` access for `ExecutionMethod`
+
 ## [0.1.1] - 2019-04-02
 
 ### Added

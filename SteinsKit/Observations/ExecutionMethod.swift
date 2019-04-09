@@ -13,3 +13,15 @@ public enum ExecutionMethod {
     case syncOnQueue(DispatchQueue)
     case asyncOnQueue(DispatchQueue)
 }
+
+extension ExecutionMethod {
+    
+    public static var asyncOnMain: ExecutionMethod {
+        return .asyncOnQueue(.main)
+    }
+    
+    public static func asyncOnGlobal(qos: DispatchQoS.QoSClass = .default) -> ExecutionMethod {
+        return .asyncOnQueue(.global(qos: qos))
+    }
+    
+}
