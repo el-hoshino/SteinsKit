@@ -59,7 +59,7 @@ final class ViewController: UIViewController {
     private func startObservation() {
         model.count
             .map({ "Welcome!\nWe have \($0) visitors visited\nour playground!" })
-            .beObserved(by: label, .asyncOnQueue(.main), onChanged: { $0.text = $1 })
+            .beObserved(by: label, .asyncOnMain, onChanged: { $0.text = $1 })
     }
     
     private func addCount() {
