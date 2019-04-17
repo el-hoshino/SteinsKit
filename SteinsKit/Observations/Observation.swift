@@ -42,8 +42,8 @@ struct Observation<Value> {
 
 extension Observation {
     
-    var observerDeinited: Bool {
-        return observer == nil
+    var canRunObservingAction: Bool {
+        return observer != nil && disposer != nil
     }
     
     func run (with value: Value) {

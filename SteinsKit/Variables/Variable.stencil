@@ -49,11 +49,11 @@ extension {{type}} {
         {% endif %}
 
         for observation in observations {
-            if observation.observerDeinited {
-                observations.remove(observation)
+            if observation.canRunObservingAction {
+                observation.run(with: newValue)
 
             } else {
-                observation.run(with: newValue)
+                observations.remove(observation)
             }
 
         }
