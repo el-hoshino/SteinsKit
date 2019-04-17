@@ -14,7 +14,7 @@ public final class {{type}}<Value> {
 
     private var observations: Set<Observation<Value>> = []
 
-    private var relatedVariables: [AnyObject] = []
+    private var children: Set<VariableNodeContainer> = []
 
     public init(_ value: Value) {
         {% if type|contains:"Lazy" %}
@@ -47,6 +47,12 @@ extension {{type}} {
         {% else %}
         let newValue = value
         {% endif %}
+
+        for child in children {
+            if child.isObservationsEmpty {
+                children.remove(child)
+            }
+        }
 
         for observation in observations {
             if observation.canRunObservingAction {
@@ -116,6 +122,14 @@ extension {{ type }} {
 
 }
 
+extension {{ type }}: VariableNode {
+
+    var isObservationsEmpty: Bool {
+        return observations.isEmpty
+    }
+
+}
+
 extension {{ type }}: Observable {
 
     public func runWithLatestValue (_ execution: (Value) -> Void) {
@@ -132,14 +146,21 @@ extension {{ type }}: Observable {
     public func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue> {
 
         {% if type|contains:"Lazy" %}
+
         let transformedValue = value.transformed(by: transform)
         let transformedVariable = LazyVariable<NewValue>(lazyValue: transformedValue)
+
         {% else %}
+
         let transformedValue = transform(value)
         let transformedVariable = Variable<NewValue>(transformedValue)
+
         {% endif %}
+
         addObserver(transformedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
-        relatedVariables.append(transformedVariable)
+
+        let child = VariableNodeContainer(node: transformedVariable)
+        children.insert(child)
 
         let wrappedVariable = AnyObservable(transformedVariable)
         return wrappedVariable
