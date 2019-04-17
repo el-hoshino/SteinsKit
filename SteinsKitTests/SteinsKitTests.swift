@@ -73,7 +73,34 @@ class SteinsKitTests: XCTestCase {
         int.accept({ $0 })
         int.accept({ $0 })
         // ↑ to run observation cycles so unneeded observations can be released
+        // since int has a map, it has to execute 2 `accept`s to release the objects:
+        // on the 1st time, the mapped variable's observations will become empty because label released
+        // then on the 2nd time, int's observations will becom empty because the mapped variable has no observations
         XCTAssert(intMirror.observations.count == 0)
+        
+        var disposer: NSObject? = NSObject()
+        
+        label = UILabel()
+        XCTAssert(label?.text == nil)
+        
+        int.beObserved(by: label!, disposer: disposer, onChanged: { $0.text = "\($1)" })
+        XCTAssertEqual(intMirror.observations.count, 1)
+        XCTAssertEqual(label?.text, "0")
+        
+        disposer = nil
+        int.accept(1)
+        XCTAssertEqual(intMirror.observations.count, 0)
+        XCTAssertEqual(label?.text, "0")
+        
+        label = UILabel()
+        XCTAssertEqual(label?.text, nil)
+        
+        int.beObserved(by: label!, disposer: disposer, onChanged: { $0.text = "\($1)" })
+        XCTAssertEqual(intMirror.observations.count, 0)
+        XCTAssertEqual(label?.text, nil)
+        
+        int.accept(2)
+        XCTAssertEqual(label?.text, nil)
 
     }
 
