@@ -73,7 +73,7 @@ SteinsKit uses `Variable` and `LazyVariable` classes to store the value, the clo
 
 You may notice that in the sample above, there is no `[weak object]` capture list, or subscription disposing declarations like `.disposed(by: disposeBag)` which you may be familiar with if you use RxSwift. This is because:
 
-1. The object passed to `by:` parameter in `beObserved` method will be weakly referred in `Variable`. This makes the object acts like a `DisposeBag` in RxSwift, that when the object is released from memory, the subscription will also be released from the `Variable`.
+1. The object passed to `by:` parameter in `beObserved` method will be weakly referred in `Variable`. This makes the object acts like a `DisposeBag` in RxSwift, that when the object is released from memory, the subscription will also be released from the `Variable`. But if you'd like to choose another object to be the dispose bag, you can also set it with `disposer` parameter in `beObserved` method.
 2. The object passed to `by:` parameter in `beObserved` method will also be sent to `onChanged` handler closure as the first input parameter `$0`, and is already weakly captured inside the `beObserved` method. So you don't have to declare it in the capture list manually in your code, and in addition you can directly use it in your closure with `$1` as the latest value.
 
 In addition, you can also choose which queue to use for the observation. The settings are:
@@ -88,7 +88,7 @@ All the design described above makes it much more simple to write an Observer Pa
 
 ## Known issues
 
-- [ ] No enough tests yet, especially about the ARC.
+- [ ] No enough tests yet~, especially about the ARC~.
 
 ## What doesn the name SteinsKit mean
 
