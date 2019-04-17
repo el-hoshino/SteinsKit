@@ -18,5 +18,7 @@ public protocol Observable {
     
     func beObserved <Observer: AnyObject> (by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void)
     func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void)
+    func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void)
+    func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void)
     
 }
