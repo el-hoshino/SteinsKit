@@ -19,7 +19,7 @@ class SteinsKitTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
+    func testNormalObservation() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         
@@ -38,6 +38,23 @@ class SteinsKitTests: XCTestCase {
         XCTAssert(label.text == "2")
         
         var checked = false
+        int.runWithLatestValue({ XCTAssert($0 == 1); checked = true })
+        XCTAssert(checked)
+        
+    }
+    
+    func testRunWithLatestValue() {
+        
+        let int = Variable(0)
+        
+        var checked = false
+        int.runWithLatestValue({ XCTAssert($0 == 0); checked = true })
+        XCTAssert(checked)
+        
+        checked = false
+        XCTAssert(!checked)
+        
+        int.accept(1)
         int.runWithLatestValue({ XCTAssert($0 == 1); checked = true })
         XCTAssert(checked)
         
