@@ -59,6 +59,23 @@ class SteinsKitTests: XCTestCase {
         XCTAssert(checked)
         
     }
+    
+    func testExistance() {
+        
+        let int = Variable(0)
+        let intMirror = Mirror(reflecting: int)
+        
+        var label: UILabel? = UILabel()
+        int.map({ "\($0)" }).beObserved(by: label!, onChanged: { $0.text = $1 })
+        XCTAssert(intMirror.observations.count == 1)
+        
+        label = nil
+        int.accept({ $0 })
+        int.accept({ $0 })
+        // ↑ to run observation cycles so unneeded observations can be released
+        XCTAssert(intMirror.observations.count == 0)
+
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
@@ -67,4 +84,19 @@ class SteinsKitTests: XCTestCase {
         }
     }
 
+}
+
+private extension Mirror {
+    
+    var observations: Set<Observation<Int>> {
+        return value(of: "observations", as: Set<Observation<Int>>.self)
+    }
+    
+    func value <Value> (of name: String, `as` type: Value.Type) -> Value {
+        
+        let child = children.first(where: { $0.label == name })!
+        // swiftlint:disable:next force_cast
+        return child.value as! Value
+    }
+    
 }
