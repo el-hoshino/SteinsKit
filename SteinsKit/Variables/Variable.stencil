@@ -2,7 +2,7 @@
 
 {% for type in variableTypes %}
 
-public final class {{type}}<Value> {
+public final class {{ type }}<Value> {
 
     {% if type|contains:"Lazy" %}
     private var value: Lazy<Value> {
@@ -38,7 +38,7 @@ public final class {{type}}<Value> {
 
 }
 
-extension {{type}} {
+extension {{ type }} {
 
     private func runObservations() {
 
@@ -68,13 +68,16 @@ extension {{type}} {
 
 }
 
-extension {{type }} {
+extension {{ type }} {
 
     private func addObserver <Observer: AnyObject> (_ observer: Observer,
+                                                    disposer: AnyObject?,
                                                     executionMethod: ExecutionMethod,
                                                     handler: @escaping (Observer, Value) -> Void) {
 
-        let observation = Observation(observer: observer, method: executionMethod, observingAction: handler)
+        guard let disposer = disposer else { return }
+
+        let observation = Observation(observer: observer, disposer: disposer, method: executionMethod, observingAction: handler)
 
         observations.insert(observation)
 
@@ -157,7 +160,7 @@ extension {{ type }}: Observable {
 
         {% endif %}
 
-        addObserver(transformedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
+        addObserver(transformedVariable, disposer: transformedVariable, executionMethod: .directly, handler: { $0.accept(transform($1)) })
 
         let child = VariableNodeContainer(node: transformedVariable)
         children.insert(child)
@@ -170,7 +173,7 @@ extension {{ type }}: Observable {
     public func beObserved <Observer: AnyObject> (by observer: Observer,
                                                   onChanged handler: @escaping (Observer, Value) -> Void) {
 
-        addObserver(observer, executionMethod: .directly, handler: handler)
+        addObserver(observer, disposer: observer, executionMethod: .directly, handler: handler)
 
     }
 
@@ -178,7 +181,19 @@ extension {{ type }}: Observable {
                                                   _ method: ExecutionMethod,
                                                   onChanged handler: @escaping (Observer, Value) -> Void) {
 
-        addObserver(observer, executionMethod: method, handler: handler)
+        addObserver(observer, disposer: observer, executionMethod: method, handler: handler)
+
+    }
+
+    public func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
+
+        addObserver(observer, disposer: disposer, executionMethod: .directly, handler: handler)
+
+    }
+
+    public func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
+
+        addObserver(observer, disposer: disposer, executionMethod: method, handler: handler)
 
     }
 

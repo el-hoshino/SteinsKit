@@ -32,12 +32,6 @@ struct Observation<Value> {
         
     }
     
-    init <Observer: AnyObject> (observer: Observer, method: ExecutionMethod, observingAction: @escaping (Observer, Value) -> Void) {
-        
-        self.init(observer: observer, disposer: observer, method: method, observingAction: observingAction)
-        
-    }
-    
 }
 
 extension Observation {
