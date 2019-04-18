@@ -1,5 +1,5 @@
 excluded: # paths to ignore during linting. Takes precedence over `included`.
-  - Variable.generated.swift
+  - SteinsKit/SourceryGenerated/
 
 disabled_rules:
   - trailing_comma
