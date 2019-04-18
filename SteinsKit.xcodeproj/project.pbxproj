@@ -66,6 +66,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF03390222684A0300146B2D /* SourceryGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */,
+			);
+			path = SourceryGenerated;
+			sourceTree = "<group>";
+		};
 		BF638FE92243C71600058858 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +97,7 @@
 			children = (
 				BF638FF62243C71600058858 /* SteinsKit.h */,
 				BF638FF72243C71600058858 /* Info.plist */,
+				BF03390222684A0300146B2D /* SourceryGenerated */,
 				BF7FE1402244AF8C00FB4A20 /* Observations */,
 				BF7FE1412244AFBA00FB4A20 /* Variables */,
 			);
@@ -119,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				BF7FE1422244B0EC00FB4A20 /* Variable.stencil */,
-				BF7FE1452244D1CD00FB4A20 /* Variable.generated.swift */,
 				BF5FDB022248E78E001C5D93 /* LazyValue.swift */,
 				BF64B8212267021200214DE2 /* VariableNode.swift */,
 			);

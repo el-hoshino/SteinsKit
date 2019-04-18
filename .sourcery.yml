@@ -7,4 +7,4 @@ templates:
   - SteinsKit/Variables/Variable.stencil
 
 output:
-  SteinsKit/Variables
+  SteinsKit/SourceryGenerated
