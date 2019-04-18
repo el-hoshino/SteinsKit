@@ -21,21 +21,21 @@ private class AnyObservableBox<Value> {
     }
     
     func beObserved<Observer>(by observer: Observer,
-                              onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+                              onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         fatalError()
     }
     
     func beObserved<Observer>(by observer: Observer,
                               _ method: ExecutionMethod,
-                              onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+                              onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         fatalError()
     }
     
-    func beObserved<Observer>(by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    func beObserved<Observer>(by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         fatalError()
     }
     
-    func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         fatalError()
     }
     
@@ -58,23 +58,23 @@ private final class ObservableBox<O: Observable>: AnyObservableBox<O.Value> {
     }
     
     override func beObserved<Observer>(by observer: Observer,
-                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer : AnyObject {
+                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer: AnyObject {
         return base.beObserved(by: observer, onChanged: handler)
     }
     
     override func beObserved<Observer>(by observer: Observer,
                                        _ method: ExecutionMethod,
-                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer : AnyObject {
+                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer: AnyObject {
         return base.beObserved(by: observer, method, onChanged: handler)
     }
     
     override func beObserved<Observer>(by observer: Observer,
                                        disposer: AnyObject?,
-                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer : AnyObject {
+                                       onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer: AnyObject {
         return base.beObserved(by: observer, disposer: disposer, onChanged: handler)
     }
     
-    override func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer : AnyObject {
+    override func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, O.Value) -> Void) where Observer: AnyObject {
         return base.beObserved(by: observer, method, disposer: disposer, onChanged: handler)
     }
     
@@ -100,19 +100,19 @@ extension AnyObservable: Observable {
         return box.map(transform)
     }
     
-    public func beObserved<Observer>(by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    public func beObserved<Observer>(by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         return box.beObserved(by: observer, onChanged: handler)
     }
     
-    public func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    public func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         return box.beObserved(by: observer, method, onChanged: handler)
     }
     
-    public func beObserved<Observer>(by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    public func beObserved<Observer>(by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         return box.beObserved(by: observer, disposer: disposer, onChanged: handler)
     }
     
-    public func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer : AnyObject {
+    public func beObserved<Observer>(by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) where Observer: AnyObject {
         return box.beObserved(by: observer, method, disposer: disposer, onChanged: handler)
     }
     
