@@ -11,12 +11,13 @@ import Foundation
 struct Observation<Value> {
     
     private(set) weak var observer: AnyObject?
+    private(set) weak var disposer: AnyObject?
     private let method: ExecutionMethod
     private var action: (Value) -> Void
     
     private let hashObject: NSObject = .init()
     
-    init <Observer: AnyObject> (observer: Observer, method: ExecutionMethod, observingAction: @escaping (Observer, Value) -> Void) {
+    init <Observer: AnyObject> (observer: Observer, disposer: AnyObject, method: ExecutionMethod, observingAction: @escaping (Observer, Value) -> Void) {
         
         let action: (Value) -> Void = { [weak observer] value in
             if let observer = observer {
@@ -25,6 +26,7 @@ struct Observation<Value> {
         }
         
         self.observer = observer
+        self.disposer = disposer
         self.method = method
         self.action = action
         
@@ -34,8 +36,8 @@ struct Observation<Value> {
 
 extension Observation {
     
-    var observerDeinited: Bool {
-        return observer == nil
+    var canRunObservingAction: Bool {
+        return observer != nil && disposer != nil
     }
     
     func run (with value: Value) {

@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2019-04-18
+
+### Added
+- An optional parameter `disposer` for `beObserved` methods in `Observable`s.
+  - if you don't pass any value to this parameter, then the observer will become the disposer.
+  - When the disposer become released, the observation will be removed.
+
 ## [0.1.2] - 2019-04-10
 
 ### Added
