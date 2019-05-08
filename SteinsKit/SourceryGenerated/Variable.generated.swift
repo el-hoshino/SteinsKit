@@ -127,27 +127,6 @@ extension Variable: Observable {
 
     }
 
-    public func beObserved <Observer: AnyObject> (by observer: Observer,
-                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: observer, executionMethod: .directly, handler: handler)
-
-    }
-
-    public func beObserved <Observer: AnyObject> (by observer: Observer,
-                                                  _ method: ExecutionMethod,
-                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: observer, executionMethod: method, handler: handler)
-
-    }
-
-    public func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: disposer, executionMethod: .directly, handler: handler)
-
-    }
-
     public func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
 
         addObserver(observer, disposer: disposer, executionMethod: method, handler: handler)
@@ -283,27 +262,6 @@ extension LazyVariable: Observable {
 
         let wrappedVariable = AnyObservable(transformedVariable)
         return wrappedVariable
-
-    }
-
-    public func beObserved <Observer: AnyObject> (by observer: Observer,
-                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: observer, executionMethod: .directly, handler: handler)
-
-    }
-
-    public func beObserved <Observer: AnyObject> (by observer: Observer,
-                                                  _ method: ExecutionMethod,
-                                                  onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: observer, executionMethod: method, handler: handler)
-
-    }
-
-    public func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
-
-        addObserver(observer, disposer: disposer, executionMethod: .directly, handler: handler)
 
     }
 
