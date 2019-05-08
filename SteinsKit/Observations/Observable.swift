@@ -16,9 +16,28 @@ public protocol Observable {
     
     func map <NewValue> (_ transform: @escaping (Value) -> NewValue) -> AnyObservable<NewValue>
     
-    func beObserved <Observer: AnyObject> (by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void)
-    func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void)
-    func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void)
     func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void)
+    
+}
+
+extension Observable {
+    
+    func beObserved <Observer: AnyObject> (by observer: Observer, onChanged handler: @escaping (Observer, Value) -> Void) {
+        
+        return beObserved(by: observer, .directly, disposer: observer, onChanged: handler)
+        
+    }
+    
+    func beObserved <Observer: AnyObject> (by observer: Observer, _ method: ExecutionMethod, onChanged handler: @escaping (Observer, Value) -> Void) {
+        
+        return beObserved(by: observer, method, disposer: observer, onChanged: handler)
+        
+    }
+    
+    func beObserved <Observer: AnyObject> (by observer: Observer, disposer: AnyObject?, onChanged handler: @escaping (Observer, Value) -> Void) {
+        
+        return beObserved(by: observer, .directly, disposer: disposer, onChanged: handler)
+        
+    }
     
 }
