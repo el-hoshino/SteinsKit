@@ -7,7 +7,9 @@
 * [ ] I have added the required tests to prove the fix/feature I am adding
 * [ ] I have run the tests and they pass
 
-This pull request reffers to the following issue: ...
+* [ ] What this PR fixes doesn't appear in [issues](https://github.com/el-hoshino/SteinsKit/issues)
+
+This pull request fixes: ...
 
 ### Pull Request Description
 

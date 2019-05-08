@@ -20,6 +20,12 @@
          <FileRef
             location = "group:.github/PULL_REQUEST_TEMPLATE/issue.md">
          </FileRef>
+         <FileRef
+            location = "group:.github/PULL_REQUEST_TEMPLATE/bug_fix.md">
+         </FileRef>
+         <FileRef
+            location = "group:.github/PULL_REQUEST_TEMPLATE/feature_implementation.md">
+         </FileRef>
       </Group>
       <FileRef
          location = "group:README.md">
