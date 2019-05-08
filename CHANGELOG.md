@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Enhancements
+
+- Sourcery installation is now optional!
+  - Since the generated files are included in the repository now, the sourcery step in Build Phases is now optional, so framework users don't have to install it.
+
 ## [0.1.3] - 2019-04-18
 
 ### Added

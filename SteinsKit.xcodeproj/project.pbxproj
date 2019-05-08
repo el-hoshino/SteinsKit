@@ -262,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "which sourcery >/dev/null || brew install sourcery\nsourcery \n";
+			shellScript = "if which sourcery >/dev/null; then\n  sourcery\nelse\n  echo \"warning: Sourcery is not installed; please install it via https://github.com/krzysztofzablocki/Sourcery\"\nfi\n";
 		};
 		BFF2A9892253131400751940 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -280,7 +280,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "which swiftlint >/dev/null || brew install swiftlint\nswiftlint\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint is not installed; please install it via https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
