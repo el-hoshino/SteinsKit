@@ -258,7 +258,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(PROJECT_DIR)/SteinsKit/Variables/Variable.generated.swift",
+				"$(PROJECT_DIR)/SteinsKit/SourceryGenerated/Variable.generated.swift",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
