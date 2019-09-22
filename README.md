@@ -5,6 +5,12 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Build Status](https://app.bitrise.io/app/5d9a1b8ef5e4230d/status.svg?token=PDEnNmSYIJEMP3qHM6A4Pg&branch=master)](https://app.bitrise.io/app/5d9a1b8ef5e4230d)
 
+## IMPORTANT: Deprecated!!
+
+This project is now **deprecated** because Apple has officially realeased [Combine](https://developer.apple.com/documentation/combine) framework. Therefore I don't see any sensible reason to import a 3rd party library which does less.
+
+If you have any interest to improve this project, please feel free to fork it :)
+
 ## Tiny yet Easy-to-use Observer-Pattern implementation in Swift 
 
 SteinsKit is a framework to help you implement *Observer Pattern* without any FRP concepts.
